@@ -5,26 +5,38 @@ const Combustible = () => {
   const [rendimiento2, setRendimiento2] = useState('');
   const [resultado2, setResultado2] = useState('');
   const [tipoRendimiento, setTipoRendimiento] = useState('km-galon');
+  const [error, setError] = useState('');
 
   const calcularCombustible = () => {
     const d = parseFloat(distancia2);
     const r = parseFloat(rendimiento2);
 
-    const factor = tipoRendimiento === 'km-galon' ? 1 : 1.60934; // convierte millas a km
+    // Validación para asegurarnos de que ambos campos están llenos
+    if (!d || !r) {
+      setError('Por favor, completa ambos campos.');
+      return;
+    }
+
+    // Factor de conversión: 1.60934 convierte millas a kilómetros
+    const factor = tipoRendimiento === 'km-galon' ? 1 : 1.60934; 
     const rendimientoConvertido = r * factor;
 
-    if (!isNaN(d) && !isNaN(r) && rendimientoConvertido !== 0) {
-      const resultado = d / rendimientoConvertido;
-      setResultado2(`Necesitas ${resultado.toFixed(2)} galones.`);
-    } else {
-      setResultado2("Completa ambos campos correctamente.");
+    if (rendimientoConvertido === 0) {
+      setError('El rendimiento no puede ser cero.');
+      return;
     }
+
+    // Cálculo
+    const resultado = d / rendimientoConvertido;
+    setResultado2(`Necesitas ${resultado.toFixed(2)} galones.`);
+    setError('');
   };
 
   const limpiarCombustible = () => {
     setDistancia2('');
     setRendimiento2('');
     setResultado2('');
+    setError('');
   };
 
   return (
@@ -62,15 +74,18 @@ const Combustible = () => {
         />
       </div>
 
+      {/* Mensaje de error */}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
       <div className="flex justify-between gap-4">
         <button 
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" 
+          className="general-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700" 
           onClick={calcularCombustible}
         >
           Calcular
         </button>
         <button 
-          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600" 
+          className="general-button bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700" 
           onClick={limpiarCombustible}
         >
           Limpiar

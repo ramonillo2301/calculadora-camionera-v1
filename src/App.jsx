@@ -71,7 +71,7 @@ function App() {
           {/* Navegación principal */}
           <nav className="navbar flex flex-wrap justify-center gap-4 p-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white">
             <NavLink to="/" className="nav-link flex items-center gap-1" end>
-              <Home className="w-5 h-5" /> Inicio
+              <Home className="w-5 h-5" /> Galones
             </NavLink>
             <NavLink to="/combustible" className="nav-link flex items-center gap-1">
               <Droplet className="w-5 h-5" /> Combustible

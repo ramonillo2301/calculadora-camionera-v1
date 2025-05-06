@@ -65,14 +65,14 @@ const KmMillas = () => {
         <div className="flex gap-3 mb-4">
           <button
             onClick={handleConversion}
-            className="w-1/2 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold transition"
+            className="general-button w-1/2 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold transition"
           >
             Convertir
           </button>
 
           <button
             onClick={handleClear}
-            className="w-1/2 p-2 bg-gray-500 hover:bg-gray-600 text-white rounded font-semibold transition"
+            className="general-button w-1/2 p-2 bg-gray-500 hover:bg-gray-600 text-white rounded font-semibold transition"
           >
             Limpiar
           </button>

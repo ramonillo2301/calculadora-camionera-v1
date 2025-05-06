@@ -59,14 +59,14 @@ const GalonesLitros = () => {
       <div className="flex gap-2 mb-3">
         <button
           onClick={handleConversion}
-          className="w-1/2 p-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded"
+          className="general-button w-1/2 p-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded"
         >
           Convertir
         </button>
 
         <button
           onClick={handleClear}
-          className="w-1/2 p-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded"
+          className="general-button w-1/2 p-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded"
         >
           Limpiar
         </button>

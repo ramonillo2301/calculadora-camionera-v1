@@ -93,8 +93,13 @@ body.dark-mode .navbar {
   background-color: #66bb6a;
   transform: scale(1.05);
 }
+.dark-mode h2  {
+  color: var(--text);
+}
 
-
+.dark-mode label {
+  color: var(--text);
+}
 /* 📐 Estilos de formulario y botones */
 .form-container {
   background-color: var(--accent);
@@ -113,7 +118,7 @@ body.dark-mode .navbar {
 h1, h2  {
   text-align: center;
   margin-bottom: 1rem;
-  
+  color: var(--accent);
 }
 
 p {
@@ -124,8 +129,12 @@ p {
   font-weight: 600;
   
 }
-
-
+label {
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: block;
+}
 /* Contenedor de los inputs y botones */
 .input-container, .button-container {
   width: 100%;
@@ -177,8 +186,25 @@ button:hover {
 button.general-button {
   background-color: var(--primary);
   color: var(--accent);
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+button.general-button:hover {
+  background-color: var(--button-hover); /* Cambia al azul más oscuro en hover */
+  transform: scale(1.05); /* Un poco de aumento de tamaño al hacer hover */
+}
+button.general-button:focus {
+  outline: none; /* Quita el contorno predeterminado */
+  background-color: var(--button-hover); /* Se mantiene el color oscuro cuando está enfocado */
+}
+button.general-button:active {
+  background-color: var(--primary); /* Se mantiene el color inicial cuando es presionado */
+  transform: scale(0.98); /* Reducción sutil al presionar el botón */
+}
 .result-text {
   margin-top: 1rem;
   font-weight: bold;
@@ -282,8 +308,6 @@ body.dark-mode .nav-link.active {
   color: var(--accent);
 }
 
-
-
 /* 🔘 Botón flotante modo oscuro */
 /* Botón flotante para el cambio de tema */
 .app-container .theme-toggle {
@@ -322,6 +346,8 @@ body.dark-mode .nav-link.active {
 .dark-mode .theme-toggle i {
   color: #ffd700;
 }
+
+
 /* Fondo transparente del botón en modo oscuro */
 .dark-mode .theme-toggle {
   background-color: rgba(0, 0, 0, 0.25);
@@ -338,9 +364,6 @@ body.dark-mode .nav-link.active {
   color: #333;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
-
-
 
 /* 🌟 Animación del icono */
 @keyframes floatIcon {

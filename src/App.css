@@ -8,7 +8,12 @@
   --shadow: rgba(0, 0, 0, 0.1);  /* Sombra suave */
   --border: #ccc;
   --input-focus: #007bff;
-  --form-shadow: rgba(0, 0, 0, 0.2);
+  --form-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Fondo para modo claro */
+
+  --bg-light: linear-gradient(90deg,rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%); /* Fondo claro */
+  --bg-dark: linear-gradient(90deg, rgba(38, 50, 56, 1) 0%, rgba(48, 79, 79, 1) 100%); /* Fondo oscuro */
 }
 
 /* 🌙 Modo oscuro */
@@ -19,170 +24,325 @@
   --primary: #4caf50;  /* Verde suave, calmante, para elementos destacados */
   --button-hover: #388e3c;  /* Verde más oscuro para hover */
   --shadow: rgba(0, 0, 0, 0.6);  /* Sombra menos intensa para un efecto más relajado */
+  
+}
+/* Modo claro (por defecto) */
+body {
+  background: var(--bg-light);
+}
+/* Modo oscuro */
+.dark-mode {
+  background: var(--bg-dark);
 }
 
-/* 🧱 Estilo base */
+/* 🧱 Reset y control de caja */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  font-family: 'poppins', sans-serif;
-  background-color: var(--bg);
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-light);
   color: var(--text);
   transition: background 0.3s ease, color 0.3s ease;
   padding: 1rem;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  margin: 0;
-  font-family: 'poppins', sans-serif;
+  background: linear-gradient(90deg,rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
 }
 
-/* 🔘 Botones */
-button {
-  width: 100%; /* El botón ocupa todo el ancho disponible */
-  padding: 0.6rem 1rem;
-  background-color: var(--primary);
-  color: var(--accent);
-  font-size: 0.6rem;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px var(--shadow);
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-bottom: 1rem; /* Espacio abajo */
-  box-sizing: border-box; /* Asegura que el padding no altere el ancho total */
-  overflow: hidden; /* Evita que el contenido sobrepase el límite del botón */
-}
-
-/* Efecto hover para los botones de conversión */
-button:hover {
-  background-color: var(--button-hover);
-  transform: scale(1.05); /* Agranda ligeramente el botón al pasar el mouse */
-}
-/* 🎯 Botones generales: Calcular y Limpiar */
-button.general-button {
-  background-color: var(--primary);
-  color: var(--accent);
-}
-
-/* 🖋 Inputs */
-input {
-  width: 100%;
-  max-width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 0.4rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: var(--accent);
-  color: var(--text);
-  transition: border-color 0.3s ease;
-}
-input::placeholder {
-  color: var(--text);
-  opacity: 0.6;
-}
-input:focus {
-  border-color: var(--primary);
-}
-
-.dark-mode button.general-button {
-  background-color: var(--button-hover);
-
-  color: #000000; /* Contraste fuerte en modo oscuro */
-}
-
-/* 🔧 Reset y control de caja */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
+/* 📦 Contenedor principal */
 .container {
   scroll-behavior: smooth;
   overflow-y: scroll; /* Para permitir el desplazamiento vertical */
   max-height: 500px; /* Ajusta la altura según sea necesario */
 }
-
-
-/* 📦 Tarjeta */
-.form-container {
-  background: rgba(255, 255, 255, 0.15); /* Fondo translúcido */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px var(--shadow);
-  border-radius: 12px;
-  width: 100%;
-  animation: fadeIn 0.5s ease-out;
+.dark-mode .form-container {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Más suave y natural */
 }
 
+.dark-mode input, 
+.dark-mode select {
+  border: 1px solid #444;
+}
+
+.dark-mode input, 
+.dark-mode select {
+  background-color: #2a2d32;
+  color: #e0e0e0;
+}
+
+body.dark-mode .navbar {
+  background-color: rgba(20, 20, 20, 0.2);
+}
+
+.dark-mode button.general-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.dark-mode button.general-button:hover {
+  background-color: #66bb6a;
+  transform: scale(1.05);
+}
+
+
+/* 📐 Estilos de formulario y botones */
+.form-container {
+  background-color: var(--accent);
+  box-shadow: 0 4px 10px var(--form-shadow);
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+}
 
 .form-container:hover {
   transform: translateY(-5px);
   box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.2);
 }
 
-h1, h2 {
+h1, h2  {
   text-align: center;
   margin-bottom: 1rem;
-  color: var(--primary);
+  
 }
+
+p {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: 'poppins' sans-serif;
+  font-weight: 600;
+  
+}
+
 
 /* Contenedor de los inputs y botones */
 .input-container, .button-container {
-  width: 100%; /* Los inputs ocupan todo el ancho disponible */
-  padding: 0 15px; /* Se agrega padding lateral para separar de los bordes */
+  width: 100%;
+  padding: 0 15px;
 }
 
-
-
-/* 🌟 Botón flotante modo oscuro */
-.theme-toggle {
-  position: fixed;
-  bottom: 1rem;
-  right: max(1rem, env(safe-area-inset-right, 1rem));
-  left: auto;
-  font-size: 1.4rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
+/* 🖋 Inputs */
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 0.4rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
   background-color: var(--accent);
   color: var(--text);
-  border: 2px solid var(--primary);
-  box-shadow: 0 0 10px var(--shadow);
-  cursor: pointer;
-  z-index: 1000;
-  transition: all 0.3s ease, transform 0.3s ease;
-  animation: floatIcon 1.2s infinite ease-in-out;
-  width: 60px; /* Establece un ancho fijo */
-  height: 60px; /* Establece una altura fija */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transition: border-color 0.3s ease;
 }
 
+input::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+
+input:focus, select:focus {
+  border-color: var(--input-focus);
+}
+
+/* Botones */
+button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background-color: var(--button-hover);
+  color: var(--accent);
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+
+button.general-button {
+  background-color: var(--primary);
+  color: var(--accent);
+}
+
+.result-text {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* 🧳 Navegación */
+.nav-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  font-size: 0.9rem;
+  background-color: var(--primary);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.nav-link:hover {
+  background-color: var(--button-hover);
+  color: #00bcd4;
+  transform: scale(1.05);
+}
+
+nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 35px auto;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar{
+  position: sticky;
+  top: 40px;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  grid: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.nav-link i {
+  margin-right: 0.5rem;
+  transition: color 0.3s ease;
+}
+.nav-link:hover,
+.nav-link:hover i {
+  color: #00bcd4; /* celeste en hover */
+}
+
+.nav-link.nav-link.active {
+  color: #ff9800;
+}
+.nav-link.active i {
+  color: #ff9800;
+}
+
+.nav-link.active,
+.nav-link.active i {
+  color: #ff9800; /* naranja cuando está activo */
+}
+
+/* 🌙 Estilos para el modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .nav-link {
+  background-color: var(--primary);
+  color: var(--text);
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+  background-color: var(--button-hover);
+  color: var(--accent);
+}
+
+
+
+/* 🔘 Botón flotante modo oscuro */
+/* Botón flotante para el cambio de tema */
+.app-container .theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 0.4rem 1.2rem;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 60px;  /* Limita el tamaño máximo */
+  max-height: 60px; /* Limita el tamaño máximo */
+  width: 60px;  /* Asegura que el botón siempre tenga un tamaño consistente */
+  height: 60px; /* Asegura que el botón siempre tenga un tamaño consistente */
+}
+/* Icono cambia de color suave según modo */
+.theme-toggle i {
+  color: #222;
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-size: 1.3rem;
+}
 .theme-toggle:hover {
   background-color: var(--primary);
   color: var(--accent);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.dark-mode .theme-toggle i {
+  color: #ffd700;
+}
+/* Fondo transparente del botón en modo oscuro */
+.dark-mode .theme-toggle {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+/* Cambiar color de los iconos en el modo oscuro */
+.dark-mode .theme-toggle i {
+  color: #ffd700; /* Color amarillo para el icono de sol */
+}
+/* Animación de rotación para el icono */
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+}
+.theme-toggle i {
+  color: #333;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 
 
-/* ✨ Animación botón */
+
+/* 🌟 Animación del icono */
 @keyframes floatIcon {
   0%, 100% {
     transform: translateY(0);
@@ -213,19 +373,26 @@ h1, h2 {
   }
 
   .theme-toggle {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.9rem;  /* Reducir el tamaño del icono */
+    padding: 0.3rem;  /* Asegurarse de que el padding sea más pequeño */
     bottom: 0.8rem;
     right: 0.8rem;
+    transform: scale(1);  /* Evitar que el botón se haga grande al pasar el mouse */
+  }
+  .theme-toggle i {
+    font-size: 1.1rem;  /* Ajustar el tamaño del icono */
   }
 }
 
 @media (max-width: 480px) {
   .theme-toggle {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    width: 45px;
+    height: 45px;
+  }
+  .theme-toggle i {
     font-size: 1rem;
-    padding: 0.4rem 0.8rem;
-    bottom: 1rem;
-    right: 1rem;
   }
 }
 
@@ -233,16 +400,17 @@ h1, h2 {
   .theme-toggle {
     right: 0.5rem;
     bottom: 1rem;
+    width: 40px;  /* Reducir aún más el tamaño */
+    height: 40px; /* Reducir aún más el tamaño */
   }
 }
 
 @media (max-width: 360px) {
   .theme-toggle {
-    right: 0.5rem;
-    left: auto; /* por si se hereda algo extraño */
-    max-width: calc(100vw - 1rem); /* evita que se desborde horizontalmente */
     font-size: 0.9rem;
     padding: 0.4rem 0.6rem;
+    width: 35px;  /* Reducir el tamaño del botón */
+    height: 35px; /* Reducir el tamaño del botón */
   }
 }
 
@@ -262,275 +430,15 @@ h1, h2 {
     bottom: 0.8rem;
     font-size: 1rem;
     padding: 0.4rem 0.9rem;
-    max-width: 85vw;
-  }
-
-  .form-container {
-    margin: 1rem auto;
-    padding: 1rem;
-  }
-
-  input {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-
-  h1, h2 {
-    font-size: 1.2rem;
+    max-width: 100vw;
   }
 }
-
-@media (max-width: 480px) {
-  input, button {
-    padding: 0.5rem;
-    font-size: 0.85rem;
-  }
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-
-@media (max-width: 480px) {
-  .nav-link {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
-    margin: 0.2rem;
-  }
-
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1d1f21;
-    --text: #e0e0e0;
-    --accent: #2a2d32;
-    --primary: #4caf50;
-    --button-hover: #388e3c;
-    --shadow: rgba(0, 0, 0, 0.3);
-  }
-}
-/* Ajustes en pantallas más pequeñas */
-@media (max-width: 768px) {
-  button {
-    margin: 0.5rem 0; /* Ajusta márgenes para pantallas pequeñas */
-    padding: 0.8rem; /* Ajusta el padding para que no quede tan grande */
-  }
-}
-/* Estilos para los botones de conversión */
-button {
-  background-color: var(--primary); /* Color azul de los botones */
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin: 9px 0;
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
 }
 
-select {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-select:focus {
-  border-color: var(--primary); /* Cambia el borde al hacer foco */
-}
-
-/* Estilo para enlaces de navegación tipo botón */
-.nav-link {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  margin: 0.3rem;
-  font-size: 0.9rem;
-  background-color: var(--primary); /* Color azul en enlaces */
-  color: var(--accent);
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 6px var(--shadow);
-}
-
-.nav-link:hover {
-  background-color: var(--button-hover);
-  color: white;
-  transform: scale(1.05);
-}
-
-nav {
-  background: rgba(255, 255, 255, 0); /* Fondo translúcido */
-  backdrop-filter: blur(12px); /* Desenfoque para el efecto glassmorphism */
-  -webkit-backdrop-filter: blur(12px); /* Compatibilidad con Safari */
-  
-  margin: 0 auto;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px var(--shadow);
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  transition: background 0.3s ease, box-shadow 0.3s ease; /* Transicion suave */
-}
-
-/* Activo */
-.nav-link.active {
-  background-color: var(--button-hover);
-  color: var(--accent);
-  transform: scale(1.08);
-}
-/* Contenedor del interruptor */
-.theme-toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
-}
-
-/* Estilo del switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Ocultar el checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Estilo del slider (el área que se desliza) */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 50px;
-}
-
-/* Estilo del círculo dentro del slider (el botón deslizante) */
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  border-radius: 50%;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-}
-
-/* Estilo cuando el checkbox está activado (modo oscuro) */
-input:checked + .slider {
-  background-color: #4CAF50; /* Color del interruptor activado */
-}
-
-/* El círculo se desliza hacia la derecha cuando está activado */
-input:checked + .slider:before {
-  transform: translateX(26px); /* Desliza el círculo hacia la derecha */
-}
-
-/* Estilo cuando el interruptor está desactivado */
-input:not(:checked) + .slider {
-  background-color: #ccc; /* Color del interruptor desactivado */
-}
-
-/* Estilos para el modo oscuro */
-.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-  /* Otros estilos específicos para el modo oscuro */
-}
-/* Cambios para los íconos */
-.theme-toggle .slider i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;
-  color: #fff;
-  transition: all 0.4s ease;
-}
-
-/* Ajustes para los íconos dentro del interruptor */
-.theme-toggle .slider .theme-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;  /* Tamaño de los íconos */
-  transition: all 0.4s ease;
-}
-
-input:checked + .slider i {
-  transform: translate(-50%, -50%) scale(1.2); /* Escala ligeramente el ícono cuando está en modo oscuro */
-}
-
-/* Estilo para el modo oscuro */
-body.dark-mode {
-  background-color: #121212;
-  color: white;
-}
-
-body.dark-mode .nav-link {
-  color: white;
-}
-/* 🌙 Ajuste especial para el modo oscuro */
-body.dark-mode .form-container {
-  background: rgba(42, 45, 50, 0.2); /* Fondo más oscuro y translúcido */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-input, select, .form-container, .nav-link {
-  transition: all 0.3s ease;
-}
-.dark-mode button,
-.dark-mode button.general-button,
-.dark-mode .nav-link {
-  background-color: #007bff; /* Azul forzado */
-  color: #fff;
-}
-
-.dark-mode button:hover,
-.dark-mode .nav-link:hover {
-  background-color: #0056b3;
-}
-/* Modificaciones en el modo oscuro */
-body.dark-mode nav {
-  background: rgba(42, 45, 50, 0.2); /* Fondo más oscuro y translúcido */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra más suave para el modo oscuro */
-}
-body.dark-mode nav {
-  background: rgba(42, 45, 50, 0.3); /* fondo oscuro translúcido */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .nav-link {
-  background-color: var(--primary); /* el verde suave en modo oscuro */
-  color: var(--text);
-  box-shadow: 0 2px 6px var(--shadow);
-}
-
-body.dark-mode .nav-link:hover,
-body.dark-mode .nav-link.active {
-  background-color: var(--button-hover); /* verde más oscuro */
-  color: var(--accent);
-}

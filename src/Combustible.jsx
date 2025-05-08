@@ -38,7 +38,7 @@ const Combustible = () => {
     <div className="section p-6 rounded-2xl shadow-2xl bg-white max-w-md mx-auto border border-gray-200 dark:bg-gray-900 dark:text-white">
       <h2 className="text-xl font-bold mb-4 text-center">Revisión de Combustible</h2>
 
-      <input 
+      <input
         type="number"
         value={nivelActual}
         onChange={e => setNivelActual(e.target.value)}
@@ -46,7 +46,7 @@ const Combustible = () => {
         className="w-full mb-4 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
       />
 
-      <input 
+      <input
         type="number"
         value={nivelMaximo}
         onChange={e => setNivelMaximo(e.target.value)}
@@ -57,15 +57,15 @@ const Combustible = () => {
       {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
       <div className="flex justify-between gap-4">
-        <button 
+        <button
           onClick={calcularNivel}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+          className="general-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
         >
           Calcular
         </button>
-        <button 
+        <button
           onClick={limpiar}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 w-full"
+          className="general-button bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 w-full"
         >
           Limpiar
         </button>
@@ -77,4 +77,3 @@ const Combustible = () => {
 };
 
 export default Combustible;
-

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
+import SplashScreen  from './SplashScreen';
+
 
 import Galones from './Galones';
 import Combustible from './Combustible';
@@ -22,9 +24,23 @@ import {
   Scale,       // Para Peso
 } from 'lucide-react';
 
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [showToggle, setShowToggle] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [fadeOutSplash, setFedeOutSplash] = useState(false);
+
+  useEffect(() => {
+    // Simular carga: cambia a false después de 3.5 segundos (puedes ajustar el tiempo)
+    const timer1 = setTimeout(() => setFedeOutSplash(true), 3500); //Empieza fadeOut
+    const timer2 = setTimeout(() => setLoading(false), 4000); //Quita el Splash
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+    
+  }, []);
 
   // Detectar preferencia del sistema o modo guardado
   useEffect(() => {
@@ -55,7 +71,12 @@ function App() {
     };
   }, []);
 
+  
   const toggleTheme = () => setDarkMode(prev => !prev);
+
+  if (loading) {
+    return <SplashScreen fadeOut={fadeOutSplash} />;
+  }
 
   return (
     <UnitProvider>
